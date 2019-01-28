@@ -1,12 +1,17 @@
 .wrapper {
   display:grid;
-  grid-column: 1fr 1fr;
+  grid-template-areas: 'cat posts'
+
+}
+
+.top{
+  grid-area: "hdr"
 }
 
 .categories{
   grid-area: "cat";
 }
 
-.comments{
-  grid-area: "comm";
+.posts{
+  grid-area: "posts";
 }

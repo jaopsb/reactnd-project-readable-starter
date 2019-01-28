@@ -25,10 +25,12 @@ export const getAllPosts = () =>
 export const getAllCategories = () =>
   fetch(`${api}/categories`, { headers })
     .then(res => res.json())
-    .then(data => {
-      console.log('API Call',data)
-      return data.categories
-    })
+    .then(data => data.categories)
+
+export const getComments = (id) =>
+  fetch(`${api}/posts/${id}/comments`)
+    .then(res => res.json())
+    .then(data => data)
 
 export const update = (book, shelf) =>
   fetch(`${api}/books/${book.id}`, {
