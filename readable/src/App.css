@@ -1,0 +1,12 @@
+.wrapper {
+  display:grid;
+  grid-column: 1fr 1fr;
+}
+
+.categories{
+  grid-area: "cat";
+}
+
+.comments{
+  grid-area: "comm";
+}
