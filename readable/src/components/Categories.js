@@ -1,13 +1,24 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const Categories = ({ categories }) => (
-  <div className='categories'>
-    <h3>Categories</h3>
-    <ul>
-      <li>Home</li>
-      {categories.map(cat => <li key={cat.name + cat.path}>{cat.name}</li>)}
-    </ul>
-  </div>
-)
+class Categories extends React.Component {
+  render() {
+    console.log('Categories Component', this.props.categories)
+    return (
+      <div className='categories'>
+        <h3>Categories</h3>
+        <ul>
+          <li>Home</li>
+        </ul>
+      </div>
+    )
+  }
+}
 
-export default Categories
+function mapStateToProps({ categories }) {
+  return {
+    categories
+  }
+}
+
+export default connect(mapStateToProps)(Categories)

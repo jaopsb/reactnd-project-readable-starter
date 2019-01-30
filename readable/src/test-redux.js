@@ -1,4 +1,7 @@
 import { createStore, combineReducers } from 'redux'
+import { getAllPosts, getComments } from './API'
+import thunk from 'redux-thunk';
+import { applyMiddleware } from 'redux';
 
 //actions
 const ADD_USER = 'ADD_USER'
@@ -86,6 +89,21 @@ function comments(state = {}, action) {
   }
 }
 
+//middleware
+const logger = (store) => (next) => (action) => {
+  console.group(action.type)
+  console.log('The action: ', action)
+  const returnValue = next(action)
+  console.log('The new state: ', store.getState())
+  console.groupEnd()
+  return returnValue
+}
+
+const middleware = applyMiddleware(
+  thunk,
+  logger
+)
+
 //store
 
 export default () => {
@@ -93,31 +111,5 @@ export default () => {
   const store = createStore(combineReducers({
     posts,
     comments
-  }))
-
-  store.subscribe(() => console.log('New State-', store.getState()))
-
-  store.dispatch(addPost({
-    "id": "8xf0y6ziyjabvozdd253nd",
-    "timestamp": 1467166872634,
-    "title": "Udacity is the best place to learn React",
-    "body": "Everyone says so after all.",
-    "author": "thingtwo",
-    "category": "react",
-    "voteScore": 6,
-    "deleted": false,
-    "commentCount": 2
-  }))
-
-
-  store.dispatch(addComm({
-    "id": "894tuq4ut84ut8v4t8wun89g",
-    "parentId": "8xf0y6ziyjabvozdd253nd",
-    "timestamp": 1468166872634,
-    "body": "Hi there! I am a COMMENT.",
-    "author": "thingtwo",
-    "voteScore": 6,
-    "deleted": false,
-    "parentDeleted": false
-  }))
+  }), middleware)
 }

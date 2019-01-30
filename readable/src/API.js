@@ -12,6 +12,16 @@ const headers = {
   'Authorization': token
 }
 
+export function getInitialData() {
+  return Promise.all([
+    getAllCategories(),
+    getAllPosts(),
+  ]).then(([categories, posts]) => ({
+    categories,
+    posts,
+  }))
+}
+
 export const get = (bookId) =>
   fetch(`${api}/books/${bookId}`, { headers })
     .then(res => res.json())
