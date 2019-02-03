@@ -1,12 +1,12 @@
 import { ADD_POST, RECIEVE_POSTS } from '../actions/posts'
 
-export default function posts(state = {}, action) {
+export default function posts(state = [], action) {
   switch (action.type) {
     case RECIEVE_POSTS:
-      return {
+      return [
         ...state,
         ...action.posts
-      }
+    ]
     case ADD_POST:
       return {
         ...state,

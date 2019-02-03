@@ -3,13 +3,17 @@ import { connect } from 'react-redux'
 
 class Categories extends React.Component {
   render() {
-    console.log('Categories Component', this.props.categories)
     return (
       <div className='categories'>
         <h3>Categories</h3>
-        <ul>
+        <ol>
           <li>Home</li>
-        </ul>
+          {
+            this.props.categories.map(cat => (
+              <li key={cat.name + cat.path}>{cat.name}</li>
+            ))
+          }
+        </ol>
       </div>
     )
   }

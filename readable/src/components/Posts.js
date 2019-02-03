@@ -1,20 +1,26 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
+class Posts extends React.Component {
+  render() {
+    return (
+      <div className='comments'>
+        <h3>Posts</h3>
+        {this.props.posts.map((post) => (
+          <div key={post.id}>
+            <h5>{post.title}</h5>
+            <p>{post.body}</p>
+          </div>
+        ))}
+      </div>
+    )
+  }
+}
 
-const Post = ({ title, body }) => (
-  <div >
-    <h5>{title}</h5>
-    <p style={{ paddingLeft: '10px' }}>{body}</p>
-  </div>
-)
+function mapStateToProps({ posts }) {
+  return {
+    posts
+  }
+}
 
-const Posts = ({ posts }) => (
-  <div className='comments'>
-    <h3>Posts</h3>
-    {posts.map(post => (
-      <Post key={post.id} {...post} />
-    ))}
-  </div>
-)
-
-export default Posts
+export default connect(mapStateToProps)(Posts)
