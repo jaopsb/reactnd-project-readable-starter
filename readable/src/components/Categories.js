@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 class Categories extends React.Component {
   render() {
@@ -10,7 +11,11 @@ class Categories extends React.Component {
           <li>Home</li>
           {
             this.props.categories.map(cat => (
-              <li key={cat.name + cat.path}>{cat.name}</li>
+              <li key={cat.name + cat.path}>
+                <Link to={`/${cat.name}`}>
+                  {cat.name}
+                </Link>
+              </li>
             ))
           }
         </ol>
