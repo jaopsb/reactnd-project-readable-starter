@@ -1,17 +1,59 @@
 .wrapper {
   display:grid;
-  grid-template-areas: 'cat posts'
-
+  grid-template-areas: 'cat posts users';
 }
 
 .top{
-  grid-area: "hdr"
+  grid-area: "hdr";
 }
 
 .categories{
+  padding: 5px; 
+  width: 100px;
   grid-area: "cat";
 }
 
 .posts{
+  padding: 10px;
   grid-area: "posts";
+}
+
+.user{
+  float: right;
+  grid-area:"user";
+}
+
+.nav{
+  padding-left: 5px;
+  position: initial;
+  top:0;
+  width: 100%;
+  background-color: antiquewhite;
+}
+
+/*grid*/
+.authvote{
+  width: 50%;
+  display: grid;
+  grid-template-areas: 'auth vote';
+}
+
+.post>.author{
+  grid-area: 'auth';
+  font-size: 15%;
+  color:gray;
+}
+
+.post>.vote{
+  grid-area: 'vote';
+  font-size: 10%;
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+   color: black;
+   text-decoration-line: none;
 }

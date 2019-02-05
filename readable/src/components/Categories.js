@@ -6,19 +6,22 @@ class Categories extends React.Component {
   render() {
     return (
       <div className='categories'>
-        <h3>Categories</h3>
-        <ol>
-          <li>Home</li>
+        <ul className='list-group'>
+          <li className='list-group-item'>
+            <Link to='/'>Home</Link>
+          </li>
           {
             this.props.categories.map(cat => (
-              <li key={cat.name + cat.path}>
+              <li
+                className='list-group-item'
+                key={cat.name + cat.path}>
                 <Link to={`/${cat.name}`}>
                   {cat.name}
                 </Link>
               </li>
             ))
           }
-        </ol>
+        </ul>
       </div>
     )
   }

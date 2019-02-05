@@ -1,26 +1,28 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 class Post extends React.Component {
   render() {
     const { post } = this.props
 
     if (!post)
-      return <p>Post nao econtrado</p>
+      return <p>Post nao encontrado</p>
 
     return (
-      <div key={post.id}>
-        <h5>{post.title}</h5>
-        <p>{post.body}</p>
-      </div>
+      <Link to={`/post/${post.id}`}>
+        <div className='card post'>
+          <div className='card-body'>
+            <h3 className='card-title title'>{post.title}</h3>
+            <div className='authvote'>
+              <p className='author'>Created By: {post.author}</p>
+              <p className='vote'>Points: {post.voteScore}</p>
+            </div>
+            <p className='card-text'>{post.body}</p>
+          </div>
+        </div>
+      </Link>
     )
   }
 }
 
-function mapStateToProps({ posts }, { id }) {
-  return {
-    post: posts.find(post => post.id === id)
-  }
-}
-
-export default connect(mapStateToProps)(Post)
+export default Post
