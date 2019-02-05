@@ -1,6 +1,7 @@
 
-const api = "http://localhost:3001"
+import axios from 'axios'
 
+const api = "http://localhost:3001"
 
 // Generate a unique token for storing your bookshelf data on the backend server.
 let token = localStorage.token
@@ -36,6 +37,22 @@ export const getComments = (id) =>
   fetch(`${api}/posts/${id}/comments`)
     .then(res => res.json())
     .then(data => data)
+
+export const createPost = (post) =>
+  axios({
+    method: 'post',
+    url: `${api}/posts`,
+    data: post,
+    headers
+  })
+    .then(res => res.data)
+    .catch(err => console.log("ERROR API", err))
+
+export const deletePost = (id) =>
+  axios.delete(`${api}/posts/${id}`, { headers })
+    .then(res => res.data)
+    .catch(err => err)
+
 
 export const update = (book, shelf) =>
   fetch(`${api}/books/${book.id}`, {

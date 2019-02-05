@@ -8,6 +8,7 @@ import './App.css'
 import PostPage from './views/PostPage';
 import PostsView from './views/PostsView';
 import Nav from './components/Nav';
+import NewPost from './views/NewPost';
 
 class App extends Component {
 
@@ -19,7 +20,7 @@ class App extends Component {
       <Router>
         <React.Fragment>
           <LoadingBar />
-          <Nav/>
+          <Nav />
           {
             this.props.loading === true
               ? null
@@ -27,6 +28,7 @@ class App extends Component {
                 <Route exact path='/' component={PostsView} />
                 <Route exact path='/post/:id' component={PostPage} />
                 <Route exact path='/:category' component={PostsView} />
+                <Route exact path='/:category/new/' component={NewPost} />
               </div>
           }
         </React.Fragment>

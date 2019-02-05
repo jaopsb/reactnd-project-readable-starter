@@ -6,12 +6,12 @@ export default function posts(state = [], action) {
       return [
         ...state,
         ...action.posts
-    ]
+      ]
     case ADD_POST:
-      return {
+      return [
         ...state,
-        [action.post.id]: action.post
-      }
+        action.post
+      ]
     default:
       return state
   }

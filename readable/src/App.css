@@ -38,6 +38,10 @@
   grid-template-areas: 'auth vote';
 }
 
+.post{
+  margin: 3px;
+}
+
 .post>.author{
   grid-area: 'auth';
   font-size: 15%;
@@ -56,4 +60,44 @@ a {
 a:hover {
    color: black;
    text-decoration-line: none;
+}
+/*grid*/
+.newpost-grid{
+  display: grid;
+  width: fit-content;
+  grid-template-areas: 'bck-btn title'
+}
+
+.newpost-title{
+  grid-area: 'title'
+}
+
+.btn-new-post{
+  margin-bottom: 5px;
+  width: 100%; 
+}
+
+
+.close-search {
+  grid-area: 'bck-btn';
+  display: block;
+  top: 20px;
+  left: 15px;
+  width: 50px;
+  height: 53px;
+  background-image: url('./icons/arrow-back.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 28px;
+  font-size: 0;
+  border: none;
+  outline: none;
+}
+
+.form-post{
+  padding: 10px;
+  border-radius: 2px;
+  border: solid black;
+  margin-left: 10%;
+  margin-right: 10%;
 }

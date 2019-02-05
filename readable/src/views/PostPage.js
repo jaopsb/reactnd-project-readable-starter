@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Post from '../components/Post'
 import Categories from '../components/Categories';
+import FormCommentary from '../components/FormCommentary';
 
 class PostPage extends React.Component {
   render() {
@@ -15,7 +16,11 @@ class PostPage extends React.Component {
         <Categories />
         <div className='posts'>
           <Post post={post} />
+          <ul>
+            {Object.keys(post).map(key => <li>{key}</li>)}
+          </ul>
         </div>
+        <FormCommentary />
       </div>
     )
   }

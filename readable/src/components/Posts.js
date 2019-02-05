@@ -12,8 +12,13 @@ class Posts extends React.Component {
         </div>)
 
     return (
-      <div className='posts'>
-        {posts.map(post => <Post key={post.id} post={post} />)}
+      <div>
+        {posts && posts.map(post => {
+          return <Post
+            listView={this.props.listView}
+            key={post.id}
+            post={post} />
+        })}
       </div>
     )
   }

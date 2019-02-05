@@ -1,7 +1,17 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { handleDelPost } from '../actions/posts';
 
 class Post extends React.Component {
+
+  deletePost = () => {
+    console.log('deletando post')
+    handleDelPost(this.props.post.id)
+
+    this.props.history.push('/')
+  }
+
   render() {
     const { post } = this.props
 
@@ -18,6 +28,15 @@ class Post extends React.Component {
               <p className='vote'>Points: {post.voteScore}</p>
             </div>
             <p className='card-text'>{post.body}</p>
+            {
+              !this.props.listView &&
+              this.props.user === post.author &&
+              <button
+                className='btn btn-danger float-right'
+                onClick={this.deletePost}>
+                Delete Post
+              </button>
+            }
           </div>
         </div>
       </Link>
@@ -25,4 +44,10 @@ class Post extends React.Component {
   }
 }
 
-export default Post
+function mapStateToProps({ user }) {
+  return {
+    user
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(Post))
