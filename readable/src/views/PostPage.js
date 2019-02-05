@@ -11,19 +11,12 @@ class PostPage extends React.Component {
       return <p> Nao ha Post para ver :/</p>
 
     return (
-      <React.Fragment>
-        <div className='wrapper'>
-          <Categories />
-          <div className='posts'>
-            <Post post={post} />
-          </div>
+      <div className='wrapper'>
+        <Categories />
+        <div className='posts'>
+          <Post post={post} />
         </div>
-        <ul>
-          {Object.keys(post).map(key => {
-            return <li>{key}</li>
-          })}
-        </ul>
-      </React.Fragment>
+      </div>
     )
   }
 }
