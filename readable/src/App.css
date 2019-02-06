@@ -1,4 +1,4 @@
-.body{
+body{
   background: beige;
 }
 
@@ -57,6 +57,7 @@
   grid-area: user;
   border:solid 1px gray;
   border-radius: 3px;
+  background-color: white;
 }
 
 .nav{
@@ -74,7 +75,6 @@
 
 /*grid*/
 .authvote{
-  width: 50%;
   display: grid;
   grid-template-areas: 'auth vote vote-up vote-down';
 }
@@ -84,13 +84,13 @@
 }
 
 .post>.author{
-  grid-area: 'auth';
+  grid-area: auth;
   font-size: 15%;
   color:gray;
 }
 
 .post>.vote{
-  grid-area: 'vote';
+  grid-area: vote;
   font-size: 10%;
 }
 
@@ -156,7 +156,7 @@ a:hover {
 
 .up-vote{
   display: block;
-  grid-area: 'vote-up';
+  grid-area: vote-up;
   background-image: url('./icons/baseline-arrow_upward-24px.svg');
   background-position: center;
   background-repeat: no-repeat;
@@ -168,7 +168,7 @@ a:hover {
 
 .down-vote{
   display: block;
-  grid-area: 'vote-down';
+  grid-area: vote-down;
   background-image: url('./icons/baseline-arrow_downward-24px.svg');
   background-position: center;
   background-repeat: no-repeat;

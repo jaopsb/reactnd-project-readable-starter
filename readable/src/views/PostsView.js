@@ -5,6 +5,7 @@ import Posts from '../components/Posts';
 import Categories from '../components/Categories';
 import { logoutUser } from '../actions/user';
 import { setUser } from '../API';
+import User from '../components/User';
 
 class PostsView extends React.Component {
 
@@ -30,15 +31,9 @@ class PostsView extends React.Component {
             listView={true}
             posts={this.props.posts} />
         </div>
-        <div className='user'>
-          <p>Central do Usuario</p>
-          <p>Logged as <strong>{this.props.user}</strong></p>
-          <button
-            onClick={this.handleLogout}
-            className='btn btn-light'>
-            Change User
-          </button>
-        </div>
+        <User
+          handleLogout={this.handleLogout}
+          user={this.props.user} />
       </div>
     )
   }

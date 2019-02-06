@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import Post from '../components/Post'
-import Categories from '../components/Categories';
 import FormCommentary from '../components/FormCommentary';
 import { getComments } from '../API';
 import Commentaries from '../components/Commentaries';
@@ -15,7 +15,6 @@ class PostPage extends React.Component {
     const { post } = this.props
     const { commentaries } = this.state
 
-
     if (!post || post === null)
       return <p>There's no post left to see :/</p>
 
@@ -24,7 +23,7 @@ class PostPage extends React.Component {
 
     return (
       <div className='wrapper'>
-        <Categories />
+        <Link className="back-button" to="/" />
         <div className='posts'>
           <Post post={post} />
           <FormCommentary

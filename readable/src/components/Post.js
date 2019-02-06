@@ -70,16 +70,6 @@ class Post extends React.Component {
               }
             </div>
             {
-              !this.props.listView &&
-              <p className='card-text'>{post.body}</p> &&
-              this.props.user === post.author &&
-              <button
-                className='btn btn-danger float-right'
-                onClick={this.deletePost}>
-                Delete Post
-              </button>
-            }
-            {
               this.props.listView &&
               post.commentCount !== 0 &&
               <p className='card-text sm-comments'>{post.commentCount} comments</p>
@@ -90,6 +80,17 @@ class Post extends React.Component {
     )
   }
 }
+
+/*{
+  !this.props.listView &&
+    <p className='card-text'>{post.body}</p> &&
+    this.props.user === post.author &&
+    <button
+      className='btn btn-danger float-right'
+      onClick={this.deletePost}>
+      Delete Post
+  </button>
+}*/
 
 function mapStateToProps({ user }) {
   return {
