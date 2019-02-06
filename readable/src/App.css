@@ -1,6 +1,10 @@
+.body{
+  background: beige;
+}
+
 .wrapper {
-  display:grid;
-  grid-template-areas: 'cat posts users';
+  display: grid;
+  grid-template-areas: 'cat posts user';
 }
 
 .top{
@@ -27,26 +31,32 @@
 }
 
 .author-body{
-  grid-area: 'auth'
+  grid-area: auth;
 }
 
 .point-body{
-  grid-area:'vote'
+  grid-area: vote;
 }
 
 .categories{
   width: 100px;
-  grid-area: "cat";
+  grid-area: cat;
 }
 
 .posts{
+  width: 500px;
   padding: 10px;
-  grid-area: "posts";
+  grid-area: posts;
 }
 
 .user{
-  float: right;
-  grid-area:"user";
+  padding: 10px;
+  height: 150px;
+  margin-right: 10px;
+  text-align: center;
+  grid-area: user;
+  border:solid 1px gray;
+  border-radius: 3px;
 }
 
 .nav{
@@ -174,4 +184,26 @@ a:hover {
   border: solid black;
   margin-left: 10%;
   margin-right: 10%;
+}
+
+.login-title{
+  text-align: center;
+  grid-area: login-title;
+}
+
+.login-input{
+  grid-area: login;
+}
+
+.btn-login{
+  margin-top: 5px;
+  grid-area: btn-login;
+}
+
+.login-container{
+  display:grid;
+  margin-top: 15%;
+  margin-left: 25%;
+  margin-right: 25%;
+  grid-template-areas: ". login-title . " "login login login " ". btn-login .";
 }

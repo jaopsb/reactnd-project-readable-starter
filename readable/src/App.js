@@ -10,14 +10,21 @@ import PostsView from './views/PostsView';
 import Nav from './components/Nav';
 import NewPost from './views/NewPost';
 import Login from './views/Login';
+import { getUser } from './API';
 
 
 class App extends Component {
 
   componentDidMount() {
 
-    this.props.dispatch(handleInitialData())
+    const user = getUser()
+
+    if (user !== null)
+      this.props.dispatch(handleInitialData(user))
+
+    console.log(typeof(this.props.user))
   }
+
   render() {
     return (
       <Router>
@@ -25,17 +32,17 @@ class App extends Component {
           <LoadingBar />
           <Nav />
           {
+            !this.props.user &&
+            <Login />
+          }
+          {
             this.props.loading === true
-              ?
-              <div>
-                <h1>LOADING...</h1>
-              </div>
+              ? null
               : <div>
                 <Route exact path='/' component={PostsView} />
                 <Route exact path='/post/:id' component={PostPage} />
-                <Route exact path='/:category' component={PostsView} />
+                <Route exact path='/:category/posts' component={PostsView} />
                 <Route exact path='/:category/new/' component={NewPost} />
-                <Route exact path='/login' component={Login} />
               </div>
           }
         </React.Fragment>
@@ -45,9 +52,10 @@ class App extends Component {
 }
 
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ posts, user }) {
   return {
-    loading: posts === null
+    user,
+    loading: posts && !user
   }
 }
 

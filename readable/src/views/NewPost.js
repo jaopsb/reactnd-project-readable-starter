@@ -25,7 +25,7 @@ class NewPost extends React.Component {
     const { post } = this.state
 
     if (post.title === '' || post.body === '')
-      return alert("Nem titulo nem o corpo podem estar vazios!!")
+      return alert("The title nor the body can be empty!!")
 
     post.id = uuid()
     post.timestamp = Date.now()
@@ -33,7 +33,6 @@ class NewPost extends React.Component {
     post.category = this.props.category
 
     this.props.dispatch(handleAddPost(post))
-      .then(post => console.log("FIM CREAATE POST", post))
     this.props.history.push('/')
   }
 
@@ -63,23 +62,23 @@ class NewPost extends React.Component {
         <div className='form-post'>
           <form onSubmit={this.handleCreatePost}>
             <div className='form-group'>
-              <label htmlFor='titleInput'>Titulo</label>
+              <label htmlFor='titleInput'>Title</label>
               <input
                 className='form-control'
                 id='titleInput'
                 type='text'
-                placeholder='Um titulo interessante'
+                placeholder='A Good title!!'
                 value={this.state.post.title}
                 onChange={this.handleTitleChange}
               />
             </div>
             <div className='form-group'>
-              <label htmlFor='textInput'>O Post</label>
+              <label htmlFor='textInput'>The Post</label>
               <textarea
                 className='form-control'
                 id='textInput'
                 rows='3'
-                placeholder='Conte sua história!'
+                placeholder='Tell your story!'
                 value={this.state.post.body}
                 onChange={this.handleBodyChange}
               />
@@ -88,7 +87,7 @@ class NewPost extends React.Component {
               type="submit"
               onClick={this.handleCreatePost}
               className="btn btn-light">
-              Criar
+              Create
               </button>
           </form>
         </div>

@@ -4,9 +4,9 @@ import { recieveCat } from "./categories";
 import { showLoading, hideLoading } from 'react-redux-loading';
 import { loginUser } from "./user";
 
-const user = 'thingtwo'
+//const user = 'thingtwo'
 
-export function handleInitialData() {
+export function handleInitialData(user) {
   return (dispatch) => {
     dispatch(showLoading())
     return getInitialData()

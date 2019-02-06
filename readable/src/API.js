@@ -14,11 +14,11 @@ const headers = {
 }
 
 export function getUser() {
-  return localStorage.user
+  return localStorage.getItem('user')
 }
 
 export function setUser(user) {
-  localStorage.user = user
+  localStorage.setItem('user',user)
 }
 
 export function getInitialData() {

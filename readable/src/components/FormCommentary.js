@@ -30,14 +30,18 @@ class FormCommentary extends React.Component {
     e.preventDefault()
     const { comment } = this.state
 
+    
     if (comment.body === '')
-      return alert("You can't create a comment with no comment!!!")
-
+    return alert("You can't create a comment with no comment!!!")
+    
     comment.id = uuid()
     comment.parentId = this.props.post.id
     comment.author = this.props.user
-
+    
     createComm(comment)
+    console.log('submit comment', comment)
+
+    this.setState({ comment: {} })
   }
 
   render() {
@@ -48,7 +52,7 @@ class FormCommentary extends React.Component {
             <textarea
               className='form-control'
               onChange={this.onChangeBody}
-              value={this.state.text}
+              value={this.state.comment.body}
               placeholder='Write that Comment!!' />
             <button
               className='btn btn-info'>

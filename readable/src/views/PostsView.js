@@ -3,8 +3,16 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Posts from '../components/Posts';
 import Categories from '../components/Categories';
+import { logoutUser } from '../actions/user';
+import { setUser } from '../API';
 
 class PostsView extends React.Component {
+
+  handleLogout = () => {
+    this.props.dispatch(logoutUser())
+    setUser('')
+  }
+
   render() {
     return (
       <div className='wrapper'>
@@ -14,7 +22,7 @@ class PostsView extends React.Component {
             this.props.category &&
             <Link to={`/${this.props.category}/new/`}>
               <button className='btn btn-light btn-new-post'>
-                Novo Post
+                New Post
               </button>
             </Link>
           }
@@ -25,11 +33,11 @@ class PostsView extends React.Component {
         <div className='user'>
           <p>Central do Usuario</p>
           <p>Logged as <strong>{this.props.user}</strong></p>
-          <Link to='/login'>
-            <button className='btn btn-light'>
-              Change User
-            </button>
-          </Link>
+          <button
+            onClick={this.handleLogout}
+            className='btn btn-light'>
+            Change User
+          </button>
         </div>
       </div>
     )
