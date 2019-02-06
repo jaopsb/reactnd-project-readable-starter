@@ -25,14 +25,15 @@ class NewPost extends React.Component {
     const { post } = this.state
 
     if (post.title === '' || post.body === '')
-    return alert("Nem titulo nem o corpo podem estar vazios!!")
-    
+      return alert("Nem titulo nem o corpo podem estar vazios!!")
+
     post.id = uuid()
     post.timestamp = Date.now()
     post.author = this.props.user
     post.category = this.props.category
-    
+
     this.props.dispatch(handleAddPost(post))
+      .then(post => console.log("FIM CREAATE POST", post))
     this.props.history.push('/')
   }
 
@@ -56,8 +57,8 @@ class NewPost extends React.Component {
     return (
       <div className='container-fluid'>
         <div className='newpost-grid'>
-          <Link className="close-search" to="/" />
-          <h1 className='newpost-title'>Write New Post</h1>
+          <Link className="back-button" to="/" />
+          <h1 className='newpost-title'>New Post in {this.props.category}</h1>
         </div>
         <div className='form-post'>
           <form onSubmit={this.handleCreatePost}>

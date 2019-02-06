@@ -7,8 +7,34 @@
   grid-area: "hdr";
 }
 
+.comment{
+  display: grid;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+.comment-body{
+  padding:10px 10px;
+  grid-area: 'comm'
+}
+
+.authpoint{
+  width:50%;
+  padding:10px;
+  display: grid;
+  grid-template-areas: 'auth vote vote-up vote-down';
+}
+
+.author-body{
+  grid-area: 'auth'
+}
+
+.point-body{
+  grid-area:'vote'
+}
+
 .categories{
-  padding: 5px; 
   width: 100px;
   grid-area: "cat";
 }
@@ -31,11 +57,16 @@
   background-color: antiquewhite;
 }
 
+.list-categories{
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
 /*grid*/
 .authvote{
   width: 50%;
   display: grid;
-  grid-template-areas: 'auth vote';
+  grid-template-areas: 'auth vote vote-up vote-down';
 }
 
 .post{
@@ -53,6 +84,11 @@
   font-size: 10%;
 }
 
+.sm-comments{
+  color: gray;
+  font-size: 15px;
+}
+
 a {
   color: black;
 }
@@ -61,6 +97,7 @@ a:hover {
    color: black;
    text-decoration-line: none;
 }
+
 /*grid*/
 .newpost-grid{
   display: grid;
@@ -77,8 +114,21 @@ a:hover {
   width: 100%; 
 }
 
+.new-category{
+  margin-left: 10%;
+  margin-right: 10%;
+}
 
-.close-search {
+.btn-new-category{
+  margin: 5px;
+  width: 100%;
+}
+
+.li-new-category{
+  background-color: wheat;
+}
+
+.back-button{
   grid-area: 'bck-btn';
   display: block;
   top: 20px;
@@ -89,6 +139,30 @@ a:hover {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 28px;
+  font-size: 0;
+  border: none;
+  outline: none;
+}
+
+.up-vote{
+  display: block;
+  grid-area: 'vote-up';
+  background-image: url('./icons/baseline-arrow_upward-24px.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  font-size: 0;
+  border: none;
+  outline: none;
+}
+
+.down-vote{
+  display: block;
+  grid-area: 'vote-down';
+  background-image: url('./icons/baseline-arrow_downward-24px.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
   font-size: 0;
   border: none;
   outline: none;

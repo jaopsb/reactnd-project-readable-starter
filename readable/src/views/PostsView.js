@@ -12,11 +12,11 @@ class PostsView extends React.Component {
         <div className='posts'>
           {
             this.props.category &&
-            <button className='btn btn-light btn-new-post'>
-              <Link to={`/${this.props.category}/new/`}>
+            <Link to={`/${this.props.category}/new/`}>
+              <button className='btn btn-light btn-new-post'>
                 Novo Post
-              </Link>
-            </button>
+              </button>
+            </Link>
           }
           <Posts
             listView={true}
@@ -24,21 +24,25 @@ class PostsView extends React.Component {
         </div>
         <div className='user'>
           <p>Central do Usuario</p>
-          <p>Dados aqui vao ficar</p>
-          <p>Yoda style vou falar</p>
-          <p>Pq assim, pica eu vou ficar</p>
+          <p>Logged as <strong>{this.props.user}</strong></p>
+          <Link to='/login'>
+            <button className='btn btn-light'>
+              Change User
+            </button>
+          </Link>
         </div>
       </div>
     )
   }
 }
 
-function mapStateToProps({ posts }, props) {
+function mapStateToProps({ posts, user }, props) {
   const { category } = props.match.params
 
   return {
     category,
-    posts: category ? posts.filter(post => post.category === category) : posts
+    posts: category ? posts.filter(post => post.category === category) : posts,
+    user
   }
 }
 

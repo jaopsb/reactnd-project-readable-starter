@@ -9,10 +9,13 @@ import PostPage from './views/PostPage';
 import PostsView from './views/PostsView';
 import Nav from './components/Nav';
 import NewPost from './views/NewPost';
+import Login from './views/Login';
+
 
 class App extends Component {
 
   componentDidMount() {
+
     this.props.dispatch(handleInitialData())
   }
   render() {
@@ -23,12 +26,16 @@ class App extends Component {
           <Nav />
           {
             this.props.loading === true
-              ? null
+              ?
+              <div>
+                <h1>LOADING...</h1>
+              </div>
               : <div>
                 <Route exact path='/' component={PostsView} />
                 <Route exact path='/post/:id' component={PostPage} />
                 <Route exact path='/:category' component={PostsView} />
                 <Route exact path='/:category/new/' component={NewPost} />
+                <Route exact path='/login' component={Login} />
               </div>
           }
         </React.Fragment>
@@ -44,4 +51,4 @@ function mapStateToProps({ posts }) {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(App)

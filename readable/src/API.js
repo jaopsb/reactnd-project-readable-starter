@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 
-const api = "http://localhost:3001"
+export const api = "http://localhost:3001"
 
 // Generate a unique token for storing your bookshelf data on the backend server.
 let token = localStorage.token
@@ -11,6 +11,14 @@ if (!token)
 const headers = {
   'Accept': 'application/json',
   'Authorization': token
+}
+
+export function getUser() {
+  return localStorage.user
+}
+
+export function setUser(user) {
+  localStorage.user = user
 }
 
 export function getInitialData() {
@@ -34,9 +42,36 @@ export const getAllCategories = () =>
     .then(data => data.categories)
 
 export const getComments = (id) =>
-  fetch(`${api}/posts/${id}/comments`)
-    .then(res => res.json())
-    .then(data => data)
+  axios({
+    method: 'get',
+    url: `${api}/posts/${id}/comments`,
+    data: id,
+    headers
+  })
+    .then(res => res.data)
+    .catch(err => console.log("ERROR API", err))
+
+
+export const createComm = (comment) =>
+  axios({
+    method: 'post',
+    url: `${api}/comments`,
+    data: comment,
+    headers
+  })
+    .then(res => res.data)
+    .catch(err => console.log("ERROR API", err))
+
+
+export const handleVote = (id, option, type) =>
+  axios({
+    method: 'post',
+    url: `${api}/${type}/${id}`,
+    data: { option },
+    headers
+  })
+    .then(res => res.data)
+    .catch(err => console.log("ERROR API", err))
 
 export const createPost = (post) =>
   axios({
@@ -52,25 +87,3 @@ export const deletePost = (id) =>
   axios.delete(`${api}/posts/${id}`, { headers })
     .then(res => res.data)
     .catch(err => err)
-
-
-export const update = (book, shelf) =>
-  fetch(`${api}/books/${book.id}`, {
-    method: 'PUT',
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ shelf })
-  }).then(res => res.json())
-
-export const search = (query) =>
-  fetch(`${api}/search`, {
-    method: 'POST',
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ query })
-  }).then(res => res.json())
-    .then(data => data.books)
