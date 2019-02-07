@@ -11,6 +11,12 @@ body {
   grid-area: "hdr";
 }
 
+.error-page {
+  margin: auto;
+  height: 100px;
+  text-align: center;
+}
+
 .comment {
   display: grid;
   margin: 5px;
@@ -22,6 +28,32 @@ body {
 .comment-body {
   padding: 10px 10px;
   grid-area: 'comm'
+}
+
+.new-post-btn-container {
+  display: grid;
+  grid-template-areas: 'btn btn form'
+}
+
+.form-select-categories {
+  display: grid;
+  margin-top: 5px;
+  grid-template-areas: 'select select select btn';
+}
+
+.form-btn-new-post {
+  display: grid;
+  grid-area: form;
+  grid-template-areas: 'select btn'
+}
+
+.select {
+  grid-area: select
+}
+
+.btn-select {
+  margin-left: 5px;
+  grid-area: btn
 }
 
 .authpoint {
@@ -44,7 +76,6 @@ body {
 }
 
 .posts {
-  width: 500px;
   padding: 10px;
   grid-area: posts;
 }
@@ -73,7 +104,12 @@ body {
   margin-right: 20%;
 }
 
-/*grid*/
+
+.text-area-new-post{
+  margin-bottom: 5px;
+}
+
+
 
 .authvote {
   display: grid;
@@ -95,6 +131,11 @@ body {
   font-size: 10%;
 }
 
+.sm-date {
+  font-size: 80%;
+  color: gray;
+}
+
 .post-title-container {
   display: grid;
   grid-template-areas: 'title config'
@@ -106,16 +147,19 @@ body {
 
 .config {
   grid-area: config;
+  float: right;
   display: block;
   width: 50px;
   height: 50px;
   background-image: url('./icons/settings.svg');
   background-position: center;
   background-repeat: no-repeat;
+  background-color: white;
   background-size: 28px;
   font-size: 0;
   border: none;
   outline: none;
+  margin-top:4px;
 }
 
 .sm-comments {
@@ -147,6 +191,7 @@ a:hover {
 .btn-new-post {
   margin-bottom: 5px;
   width: 100%;
+  grid-area: btn
 }
 
 .new-category {
@@ -168,11 +213,11 @@ a:hover {
   grid-template-areas: 'btn-type . . btn-delete'
 }
 
-.btn-type-submit{
+.btn-type-submit {
   grid-area: btn-type;
 }
 
-.btn-form-delete{
+.btn-form-delete {
   grid-area: btn-delete;
 }
 

@@ -87,10 +87,7 @@ export const updatePost = (post) =>
   axios({
     method: 'put',
     url: `${api}/posts/${post.id}`,
-    data: {
-      title: post.title,
-      body: post.body
-    },
+    data: { ...post },
     headers
   })
     .then(res => res.data)

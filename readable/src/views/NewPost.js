@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 
 import { handleAddPost, handleEditPost, handleDelPost } from '../actions/posts'
+import Select from '../components/Select';
 
 class NewPost extends React.Component {
   state = {
@@ -16,14 +17,18 @@ class NewPost extends React.Component {
       voteScore: 0,
       deleted: false,
       commentCount: 0
-    }
+    },
+    categorySelected: ''
   }
 
   componentDidMount = () => {
     const { post } = this.props
 
-    if (post)
-      this.setState({ post })
+    if (post) {
+      this.setState({ post, categorySelected: post.category })
+    } else {
+      this.setState({ categorySelected: this.props.categories[0] })
+    }
   }
 
   handleSubmit = (e) => {
@@ -46,11 +51,18 @@ class NewPost extends React.Component {
     }
 
     if (this.props.type === 'Edit') {
+      
       const resp = window.confirm("Confirm editing?")
 
       if (resp) {
+
+        post.category = this.state.categorySelected
+
+        console.log('post editing', post)
+
         this.props.dispatch(handleEditPost(post))
-        this.props.history.push('/')
+          .then(() => this.props.history.push('/'))
+
       }
     }
   }
@@ -75,18 +87,21 @@ class NewPost extends React.Component {
 
     const { post } = this.state
 
-    console.log(this.state)
-
     const resp = window.confirm("Are you really going to delete this post??")
 
     if (resp) {
       this.props.dispatch(handleDelPost(post.id))
-      this.props.history.push('/')
+        .then(() => this.props.history.push('/'))
     }
+  }
 
+  handleChangeCategory = (e) => {
+    this.setState({ categorySelected: e.target.value })
   }
 
   render() {
+
+    console.log("component did mount", this.state)
 
     return (
       <div className='container-fluid'>
@@ -94,7 +109,9 @@ class NewPost extends React.Component {
           <Link className="back-button" to="/" />
           {
             this.props.type === 'Create' &&
-            <h1 className='newpost-title'>New Post in {this.props.category}</h1>
+              this.props.category ?
+              <h1 className='newpost-title'>New Post in {this.props.category}</h1> :
+              this.props.type === 'Create' && <h1 className='newpost-title'>New Post</h1>
           }
           {
             this.props.type === 'Edit' &&
@@ -117,13 +134,19 @@ class NewPost extends React.Component {
             <div className='form-group'>
               <label htmlFor='textInput'>The Post</label>
               <textarea
-                className='form-control'
+                className='form-control text-area-new-post'
                 id='textInput'
                 rows='3'
                 placeholder='Tell your story!'
                 value={this.state.post.body}
                 onChange={this.handleBodyChange}
               />
+              <Select
+                options={this.props.categories}
+                showSubmitBtn={false}
+                onChange={this.handleChangeCategory}
+                btnTitle={'Select Category'}
+                selected={this.state.categorySelected} />
             </div>
             <div className='btn-form-container'>
               <button
@@ -132,12 +155,15 @@ class NewPost extends React.Component {
                 className="btn btn-light btn-type-submit">
                 {this.props.type}
               </button>
-              <button
-                type="button"
-                onClick={this.handleDelPost}
-                className="btn btn-danger btn-form-delete">
-                Delete
+              {
+                this.props.type === 'Edit' &&
+                <button
+                  type="button"
+                  onClick={this.handleDelPost}
+                  className="btn btn-danger btn-form-delete">
+                  Delete
               </button>
+              }
             </div>
           </form>
         </div>
@@ -146,14 +172,15 @@ class NewPost extends React.Component {
   }
 }
 
-function mapStateToProps({ user, posts }, props) {
+function mapStateToProps({ user, posts, categories }, props) {
   const { category, id } = props.match.params
 
   return {
     user,
     category,
     post: id ? posts.find(post => post.id === id) : null,
-    type: id ? 'Edit' : 'Create'
+    type: id ? 'Edit' : 'Create',
+    categories
   }
 }
 

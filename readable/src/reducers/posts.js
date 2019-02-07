@@ -1,4 +1,4 @@
-import { ADD_POST, RECIEVE_POSTS, EDIT_POST, DEL_POST } from '../actions/posts'
+import { ADD_POST, RECIEVE_POSTS, EDIT_POST, DEL_POST, SORT_POST, VOTE_UP, VOTE_DOWN, TIME_UP, TIME_DOWN } from '../actions/posts'
 
 export default function posts(state = [], action) {
   switch (action.type) {
@@ -28,6 +28,28 @@ export default function posts(state = [], action) {
             post
         )
       ]
+
+    case SORT_POST:
+      switch (action.sort) {
+        case VOTE_UP:
+          return [
+            ...state.sort((a, b) => b.voteScore - a.voteScore)
+          ]
+        case VOTE_DOWN:
+          return [
+            ...state.sort((a, b) => a.voteScore - b.voteScore)
+          ]
+        case TIME_UP:
+          return [
+            ...state.sort((a, b) => b.timestamp - a.timestamp)
+          ]
+        case TIME_DOWN:
+          return [
+            ...state.sort((a, b) => a.timestamp - b.timestamp)
+          ]
+        default:
+          return state
+      }
     default:
       return state
   }

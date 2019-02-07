@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import LoadingBar from 'react-redux-loading'
 import { handleInitialData } from './actions/shared'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import './App.css'
 import PostPage from './views/PostPage';
@@ -11,6 +11,7 @@ import Nav from './components/Nav';
 import NewPost from './views/NewPost';
 import Login from './views/Login';
 import { getUser } from './API';
+import Error404 from './views/Error404';
 
 
 class App extends Component {
@@ -37,11 +38,16 @@ class App extends Component {
             this.props.loading === true
               ? null
               : <div>
-                <Route exact path='/' component={PostsView} />
-                <Route exact path='/post/:id' component={PostPage} />
-                <Route exact path='/:category/posts' component={PostsView} />
-                <Route exact path='/:category/new/' component={NewPost} />
-                <Route exact path='/edit/:id' component={NewPost} />
+                <Switch>
+
+                  <Route path='/' exact={true} component={PostsView} />
+                  <Route path='/post/:id' exact={true} component={PostPage} />
+                  <Route path='/:category/posts' exact={true} component={PostsView} />
+                  <Route path='/new/' exact={true} component={NewPost} />
+                  <Route path='/:category/posts/new/' exact={true} component={NewPost} />
+                  <Route path='/edit/:id' exact={true} component={NewPost} />
+                  <Route path='/' component={Error404} />
+                </Switch>
               </div>
           }
         </React.Fragment>

@@ -5,6 +5,12 @@ export const ADD_POST = 'ADD_POST'
 export const DEL_POST = 'DEL_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const RECIEVE_POSTS = 'RECIEVE_POSTS'
+export const SORT_POST = 'SORT_POST'
+
+export const VOTE_UP = 'VOTE_UP'
+export const VOTE_DOWN = 'VOTE_DOWN'
+export const TIME_UP = 'TIME_UP'
+export const TIME_DOWN = 'TIME_DOWN'
 
 export const recievePosts = (posts) => ({
   type: RECIEVE_POSTS,
@@ -24,6 +30,11 @@ export const delPost = (id) => ({
 export const editPost = (post) => ({
   type: EDIT_POST,
   post
+})
+
+export const sortPosts = (sort) => ({
+  type:SORT_POST,
+  sort
 })
 
 export function handleAddPost(post) {

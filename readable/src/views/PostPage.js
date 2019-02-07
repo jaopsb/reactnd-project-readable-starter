@@ -11,15 +11,20 @@ class PostPage extends React.Component {
     commentaries: []
   }
 
+  componentDidMount() {
+    const { post } = this.props
+
+    if (post)
+      getComments(post.id)
+        .then(commentaries => this.setState({ commentaries }))
+  }
+
   render() {
     const { post } = this.props
     const { commentaries } = this.state
 
     if (!post || post === null)
       return <p>There's no post left to see :/</p>
-
-    getComments(post.id)
-      .then(commentaries => this.setState({ commentaries }))
 
     return (
       <div className='wrapper'>
