@@ -3,7 +3,7 @@ import uuid from 'uuid'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 
-import { handleAddPost } from '../actions/posts'
+import { handleAddPost, handleEditPost, handleDelPost } from '../actions/posts'
 
 class NewPost extends React.Component {
   state = {
@@ -19,7 +19,14 @@ class NewPost extends React.Component {
     }
   }
 
-  handleCreatePost = (e) => {
+  componentDidMount = () => {
+    const { post } = this.props
+
+    if (post)
+      this.setState({ post })
+  }
+
+  handleSubmit = (e) => {
     e.preventDefault()
 
     const { post } = this.state
@@ -27,13 +34,25 @@ class NewPost extends React.Component {
     if (post.title === '' || post.body === '')
       return alert("The title nor the body can be empty!!")
 
-    post.id = uuid()
-    post.timestamp = Date.now()
-    post.author = this.props.user
-    post.category = this.props.category
+    if (this.props.type === 'Create') {
 
-    this.props.dispatch(handleAddPost(post))
-    this.props.history.push('/')
+      post.id = uuid()
+      post.timestamp = Date.now()
+      post.author = this.props.user
+      post.category = this.props.category
+
+      this.props.dispatch(handleAddPost(post))
+      this.props.history.push('/')
+    }
+
+    if (this.props.type === 'Edit') {
+      const resp = window.confirm("Confirm editing?")
+
+      if (resp) {
+        this.props.dispatch(handleEditPost(post))
+        this.props.history.push('/')
+      }
+    }
   }
 
   handleTitleChange = (e) => {
@@ -52,15 +71,38 @@ class NewPost extends React.Component {
     this.setState({ post })
   }
 
+  handleDelPost = () => {
+
+    const { post } = this.state
+
+    console.log(this.state)
+
+    const resp = window.confirm("Are you really going to delete this post??")
+
+    if (resp) {
+      this.props.dispatch(handleDelPost(post.id))
+      this.props.history.push('/')
+    }
+
+  }
+
   render() {
+
     return (
       <div className='container-fluid'>
         <div className='newpost-grid'>
           <Link className="back-button" to="/" />
-          <h1 className='newpost-title'>New Post in {this.props.category}</h1>
+          {
+            this.props.type === 'Create' &&
+            <h1 className='newpost-title'>New Post in {this.props.category}</h1>
+          }
+          {
+            this.props.type === 'Edit' &&
+            <h1 className='newpost-title'>Edit Post</h1>
+          }
         </div>
         <div className='form-post'>
-          <form onSubmit={this.handleCreatePost}>
+          <form onSubmit={this.handleSubmit}>
             <div className='form-group'>
               <label htmlFor='titleInput'>Title</label>
               <input
@@ -83,12 +125,20 @@ class NewPost extends React.Component {
                 onChange={this.handleBodyChange}
               />
             </div>
-            <button
-              type="submit"
-              onClick={this.handleCreatePost}
-              className="btn btn-light">
-              Create
+            <div className='btn-form-container'>
+              <button
+                type="submit"
+                onClick={this.handleSubmit}
+                className="btn btn-light btn-type-submit">
+                {this.props.type}
               </button>
+              <button
+                type="button"
+                onClick={this.handleDelPost}
+                className="btn btn-danger btn-form-delete">
+                Delete
+              </button>
+            </div>
           </form>
         </div>
       </div>
@@ -96,12 +146,14 @@ class NewPost extends React.Component {
   }
 }
 
-function mapStateToProps({ user }, props) {
-  const { category } = props.match.params
+function mapStateToProps({ user, posts }, props) {
+  const { category, id } = props.match.params
 
   return {
     user,
-    category
+    category,
+    post: id ? posts.find(post => post.id === id) : null,
+    type: id ? 'Edit' : 'Create'
   }
 }
 

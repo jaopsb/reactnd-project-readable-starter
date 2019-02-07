@@ -1,5 +1,5 @@
 import { showLoading, hideLoading } from "react-redux-loading";
-import { createPost, deletePost, handleVote } from "../API";
+import { createPost, deletePost, handleVote, updatePost } from "../API";
 
 export const ADD_POST = 'ADD_POST'
 export const DEL_POST = 'DEL_POST'
@@ -31,6 +31,18 @@ export function handleAddPost(post) {
     dispatch(showLoading())
     return createPost(post)
       .then(post => dispatch(addPost(post)))
+      .then((post) => {
+        dispatch(hideLoading())
+        return post
+      })
+  }
+}
+
+export function handleEditPost(post) {
+  return function (dispatch) {
+    dispatch(showLoading())
+    return updatePost(post)
+      .then(post => dispatch(editPost(post)))
       .then((post) => {
         dispatch(hideLoading())
         return post

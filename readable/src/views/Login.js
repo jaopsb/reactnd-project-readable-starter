@@ -14,7 +14,6 @@ class Login extends React.Component {
 
     if (user)
       this.props.dispatch(loginUser(user))
-
   }
 
   handleChange = (e) => {
@@ -24,7 +23,6 @@ class Login extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const { login } = this.state
-
 
     if (login === '')
       return alert('Login as Somebody,please')

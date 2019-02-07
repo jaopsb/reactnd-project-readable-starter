@@ -35,6 +35,10 @@ class Post extends React.Component {
       .then(({ post }) => this.setState({ post }))
   }
 
+  toEdit = () => {
+    window.location.replace(`/edit/${this.state.post.id}`)
+  }
+
   render() {
     const { post } = this.state
 
@@ -45,7 +49,16 @@ class Post extends React.Component {
       <Link to={`/post/${post.id}`}>
         <div className='card post'>
           <div className='card-body'>
-            <h3 className='card-title title'>{post.title}</h3>
+            <div className='post-title-container'>
+              <h3 className='card-title title'>{post.title}</h3>
+              {
+                !this.props.listView &&
+                this.props.user === post.author &&
+                <Link
+                  className='btn config'
+                  to={`/edit/${post.id}`} />
+              }
+            </div>
             <div className='authvote'>
               <p className='author'>Created By: {post.author}</p>
               <p className='vote'>Points: {post.voteScore}</p>
@@ -71,8 +84,13 @@ class Post extends React.Component {
             </div>
             {
               this.props.listView &&
-              post.commentCount !== 0 &&
               <p className='card-text sm-comments'>{post.commentCount} comments</p>
+            }
+            {
+              !this.props.listView &&
+              <div className='card-body'>
+                {post.body}
+              </div>
             }
           </div>
         </div>

@@ -44,7 +44,7 @@ function mapStateToProps({ posts, user }, props) {
 
   return {
     category,
-    posts: category ? posts.filter(post => post.category === category) : posts,
+    posts: category ? posts.filter(post => (post.category === category && !post.deleted)) : posts,
     user
   }
 }

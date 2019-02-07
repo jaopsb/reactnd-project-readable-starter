@@ -18,7 +18,7 @@ export function getUser() {
 }
 
 export function setUser(user) {
-  localStorage.setItem('user',user)
+  localStorage.setItem('user', user)
 }
 
 export function getInitialData() {
@@ -78,6 +78,19 @@ export const createPost = (post) =>
     method: 'post',
     url: `${api}/posts`,
     data: post,
+    headers
+  })
+    .then(res => res.data)
+    .catch(err => console.log("ERROR API", err))
+
+export const updatePost = (post) =>
+  axios({
+    method: 'put',
+    url: `${api}/posts/${post.id}`,
+    data: {
+      title: post.title,
+      body: post.body
+    },
     headers
   })
     .then(res => res.data)

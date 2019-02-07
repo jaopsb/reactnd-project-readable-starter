@@ -1,4 +1,4 @@
-import { ADD_POST, RECIEVE_POSTS, EDIT_POST } from '../actions/posts'
+import { ADD_POST, RECIEVE_POSTS, EDIT_POST, DEL_POST } from '../actions/posts'
 
 export default function posts(state = [], action) {
   switch (action.type) {
@@ -17,6 +17,14 @@ export default function posts(state = [], action) {
         ...state.map(post =>
           post.id === action.post.id ?
             action.post :
+            post
+        )
+      ]
+    case DEL_POST:
+      return [
+        ...state.map((post) =>
+          post.id === action.id ?
+            post.deleted = true :
             post
         )
       ]

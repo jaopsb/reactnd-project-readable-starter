@@ -21,8 +21,6 @@ class App extends Component {
 
     if (user !== null)
       this.props.dispatch(handleInitialData(user))
-
-    console.log(typeof(this.props.user))
   }
 
   render() {
@@ -43,6 +41,7 @@ class App extends Component {
                 <Route exact path='/post/:id' component={PostPage} />
                 <Route exact path='/:category/posts' component={PostsView} />
                 <Route exact path='/:category/new/' component={NewPost} />
+                <Route exact path='/edit/:id' component={NewPost} />
               </div>
           }
         </React.Fragment>

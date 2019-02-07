@@ -1,4 +1,4 @@
-body{
+body {
   background: beige;
 }
 
@@ -7,94 +7,118 @@ body{
   grid-template-areas: 'cat posts user';
 }
 
-.top{
+.top {
   grid-area: "hdr";
 }
 
-.comment{
+.comment {
   display: grid;
   margin: 5px;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  background-color: white;
 }
 
-.comment-body{
-  padding:10px 10px;
+.comment-body {
+  padding: 10px 10px;
   grid-area: 'comm'
 }
 
-.authpoint{
-  width:50%;
-  padding:10px;
+.authpoint {
+  padding: 10px;
   display: grid;
   grid-template-areas: 'auth vote vote-up vote-down';
 }
 
-.author-body{
+.author-body {
   grid-area: auth;
 }
 
-.point-body{
+.point-body {
   grid-area: vote;
 }
 
-.categories{
+.categories {
   width: 100px;
   grid-area: cat;
 }
 
-.posts{
+.posts {
   width: 500px;
   padding: 10px;
   grid-area: posts;
 }
 
-.user{
+.user {
   padding: 10px;
   height: 150px;
   margin-right: 10px;
   text-align: center;
   grid-area: user;
-  border:solid 1px gray;
+  border: solid 1px gray;
   border-radius: 3px;
   background-color: white;
 }
 
-.nav{
+.nav {
   padding-left: 5px;
   position: initial;
-  top:0;
+  top: 0;
   width: 100%;
   background-color: antiquewhite;
 }
 
-.list-categories{
+.list-categories {
   margin-left: 20%;
   margin-right: 20%;
 }
 
 /*grid*/
-.authvote{
+
+.authvote {
   display: grid;
   grid-template-areas: 'auth vote vote-up vote-down';
 }
 
-.post{
+.post {
   margin: 3px;
 }
 
-.post>.author{
+.post>.author {
   grid-area: auth;
   font-size: 15%;
-  color:gray;
+  color: gray;
 }
 
-.post>.vote{
+.post>.vote {
   grid-area: vote;
   font-size: 10%;
 }
 
-.sm-comments{
+.post-title-container {
+  display: grid;
+  grid-template-areas: 'title config'
+}
+
+.title {
+  grid-area: title;
+}
+
+.config {
+  grid-area: config;
+  display: block;
+  width: 50px;
+  height: 50px;
+  background-image: url('./icons/settings.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 28px;
+  font-size: 0;
+  border: none;
+  outline: none;
+}
+
+.sm-comments {
   color: gray;
   font-size: 15px;
 }
@@ -104,41 +128,55 @@ a {
 }
 
 a:hover {
-   color: black;
-   text-decoration-line: none;
+  color: black;
+  text-decoration-line: none;
 }
 
 /*grid*/
-.newpost-grid{
+
+.newpost-grid {
   display: grid;
   width: fit-content;
   grid-template-areas: 'bck-btn title'
 }
 
-.newpost-title{
-  grid-area: 'title'
+.newpost-title {
+  grid-area: title
 }
 
-.btn-new-post{
+.btn-new-post {
   margin-bottom: 5px;
-  width: 100%; 
+  width: 100%;
 }
 
-.new-category{
+.new-category {
   margin-left: 10%;
   margin-right: 10%;
 }
 
-.btn-new-category{
+.btn-new-category {
   margin: 5px;
   width: 100%;
 }
 
-.li-new-category{
+.li-new-category {
   background-color: wheat;
 }
 
-.back-button{
+.btn-form-container {
+  display: grid;
+  grid-template-areas: 'btn-type . . btn-delete'
+}
+
+.btn-type-submit{
+  grid-area: btn-type;
+}
+
+.btn-form-delete{
+  grid-area: btn-delete;
+}
+
+.back-button {
   grid-area: 'bck-btn';
   display: block;
   top: 20px;
@@ -154,7 +192,7 @@ a:hover {
   outline: none;
 }
 
-.up-vote{
+.up-vote {
   display: block;
   grid-area: vote-up;
   background-image: url('./icons/baseline-arrow_upward-24px.svg');
@@ -166,7 +204,7 @@ a:hover {
   outline: none;
 }
 
-.down-vote{
+.down-vote {
   display: block;
   grid-area: vote-down;
   background-image: url('./icons/baseline-arrow_downward-24px.svg');
@@ -178,7 +216,7 @@ a:hover {
   outline: none;
 }
 
-.form-post{
+.form-post {
   padding: 10px;
   border-radius: 2px;
   border: solid black;
@@ -186,22 +224,22 @@ a:hover {
   margin-right: 10%;
 }
 
-.login-title{
+.login-title {
   text-align: center;
   grid-area: login-title;
 }
 
-.login-input{
+.login-input {
   grid-area: login;
 }
 
-.btn-login{
+.btn-login {
   margin-top: 5px;
   grid-area: btn-login;
 }
 
-.login-container{
-  display:grid;
+.login-container {
+  display: grid;
   margin-top: 15%;
   margin-left: 25%;
   margin-right: 25%;

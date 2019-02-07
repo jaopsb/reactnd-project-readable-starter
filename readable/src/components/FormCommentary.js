@@ -39,7 +39,6 @@ class FormCommentary extends React.Component {
     comment.author = this.props.user
     
     createComm(comment)
-    console.log('submit comment', comment)
 
     this.setState({ comment: {} })
   }
