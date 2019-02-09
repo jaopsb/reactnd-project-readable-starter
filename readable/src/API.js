@@ -51,7 +51,6 @@ export const getComments = (id) =>
     .then(res => res.data)
     .catch(err => console.log("ERROR API", err))
 
-
 export const createComm = (comment) =>
   axios({
     method: 'post',
@@ -62,6 +61,22 @@ export const createComm = (comment) =>
     .then(res => res.data)
     .catch(err => console.log("ERROR API", err))
 
+export const editComm = (comment) =>
+  axios({
+    method: 'post',
+    url: `${api}/comments`,
+    data: comment,
+    headers
+  })
+    .then(res => res.data)
+    .catch(err => console.log("ERROR API", err))
+
+export const delComm = (id) =>
+  axios({
+    method: 'delete',
+    url: `${api}/comments/${id}`,
+    headers
+  })
 
 export const handleVote = (id, option, type) =>
   axios({

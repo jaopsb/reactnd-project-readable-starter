@@ -2,56 +2,54 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Post from '../components/Post'
-import FormCommentary from '../components/FormCommentary';
-import { getComments } from '../API';
-import Commentaries from '../components/Commentaries';
+import FormComment from '../components/FormComments';
+import Comments from '../components/Comments';
+import { handleReceiveComm, handleCreateComm } from '../actions/comments';
 
 class PostPage extends React.Component {
-  state = {
-    commentaries: []
-  }
-
   componentDidMount() {
-    const { post } = this.props
-
-    if (post)
-      getComments(post.id)
-        .then(commentaries => this.setState({ commentaries }))
+    const { id, receiveComs } = this.props
+    receiveComs(id)
   }
-
   render() {
     const { post } = this.props
-    const { commentaries } = this.state
 
     if (!post || post === null)
-      return <p>There's no post left to see :/</p>
+      return <p>There's no post here to see :/</p>
 
     return (
       <div className='wrapper'>
         <Link className="back-button" to="/" />
         <div className='posts'>
           <Post post={post} />
-          <FormCommentary
+          <FormComment
             post={post}
-            user={this.props.user} />
-          {
-            commentaries.length !== 0 &&
-            <Commentaries commentaries={commentaries} />
-          }
+            user={this.props.user}
+            handleSubmit={this.props.handleSubmit}
+          />
+          <Comments />
         </div>
       </div>
     )
   }
 }
 
-function mapStateToProps({ posts, user }, props) {
+const mapStateToProps = ({ posts, user }, props) => {
   const { id } = props.match.params
 
   return {
     user,
+    id,
     post: id ? posts.find(post => post.id === id) : null
   }
 }
 
-export default connect(mapStateToProps)(PostPage)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    receiveComs: (id) => { dispatch(handleReceiveComm(id)) },
+    handleSubmit: (comment) => dispatch(handleCreateComm(comment))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostPage)
 

@@ -22,13 +22,8 @@ export default function posts(state = [], action) {
       ]
     case DEL_POST:
       return [
-        ...state.map((post) =>
-          post.id === action.id ?
-            post.deleted = true :
-            post
-        )
+        ...state.map(post => post.id === action.id ? { ...post, deleted: true } : post)
       ]
-
     case SORT_POST:
       switch (action.sort) {
         case VOTE_UP:

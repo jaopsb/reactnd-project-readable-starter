@@ -11,7 +11,6 @@ import Nav from './components/Nav';
 import NewPost from './views/NewPost';
 import Login from './views/Login';
 import { getUser } from './API';
-import Error404 from './views/Error404';
 
 
 class App extends Component {
@@ -39,14 +38,12 @@ class App extends Component {
               ? null
               : <div>
                 <Switch>
-
-                  <Route path='/' exact={true} component={PostsView} />
-                  <Route path='/post/:id' exact={true} component={PostPage} />
-                  <Route path='/:category/posts' exact={true} component={PostsView} />
-                  <Route path='/new/' exact={true} component={NewPost} />
-                  <Route path='/:category/posts/new/' exact={true} component={NewPost} />
-                  <Route path='/edit/:id' exact={true} component={NewPost} />
-                  <Route path='/' component={Error404} />
+                  <Route exact={true} path='/' component={PostsView} />
+                  <Route exact={true} path='/new/' component={NewPost} />
+                  <Route exact={true} path='/edit/:id' component={NewPost} />
+                  <Route exact={true} path='/:category' component={PostsView} />
+                  <Route exact={true} path='/:category/new/' component={NewPost} />
+                  <Route exact={true} path='/:category/:id' component={PostPage} />
                 </Switch>
               </div>
           }

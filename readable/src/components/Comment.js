@@ -1,10 +1,10 @@
 import React from 'react'
-import { handleVote } from '../API';
 
 class Comment extends React.Component {
 
   state = {
-    comment: {}
+    comment: {},
+    edit: false
   }
 
   componentDidMount() {
@@ -14,21 +14,44 @@ class Comment extends React.Component {
   }
 
   handleUpVote = () => {
-    const { id } = this.state.comment
+    const { comment } = this.state
 
-    handleVote(id, 'upVote', 'comments')
-      .then(comment => {
-        this.setState({ comment })
-      })
+    this.props.handleVote('upVote', comment)
+      .then(comment => { this.setState({ comment }) })
   }
 
   handleDwVote = () => {
-    const { id } = this.state.comment
+    const { comment } = this.state
 
-    handleVote(id, 'downVote', 'comments')
-      .then(comment => {
-        this.setState({ comment })
-      })
+    this.props.handleVote('downVote', comment)
+      .then(comment => { this.setState({ comment }) })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+
+    const { comment } = this.state
+    this.props.handleSubmitComm(comment)
+      .then(() => this.setState({ edit: !this.state.edit }))
+
+  }
+
+  toggleEdit = () => {
+    this.setState({ edit: !this.state.edit })
+  }
+
+  toDel = () => {
+    const { comment } = this.props
+    let resp = window.confirm("Delete this comment?")
+
+    if (resp)
+      this.props.handleDel(comment.id)
+  }
+
+  handleChangeBody = (e) => {
+    const { comment } = this.state
+
+    this.setState({ comment: { ...comment, body: e.target.value } })
   }
 
   render() {
@@ -36,33 +59,67 @@ class Comment extends React.Component {
     const { body, author, voteScore } = comment
 
     return (
-      <div className='comment'>
-        <h5 className='comment-body'>{body}</h5>
-
-        <div className='authpoint'>
-
-          <p className='author-body'>
-            <strong>By: </strong>
-            {author}
-          </p>
-
-          <p className='point-body'>
-            <strong>Points: </strong>
-            {voteScore}
-          </p>
-
-          <button
-            className='btn btn-light up-vote'
-            data-toggle='tooltip'
-            data-placement='top'
-            onClick={this.handleUpVote}
-            title="Up Vote" />
-          <button
-            className='btn btn-light down-vote'
-            data-toggle='tooltip'
-            data-placement='top'
-            onClick={this.handleDwVote}
-            title='Down Vote' />
+      <div className='comm-container'>
+        {
+          this.props.user === author &&
+          <div className="btn-edit-del-comm">
+            <button
+              className='btn edit'
+              data-toggle='tolltip'
+              onClick={this.toggleEdit}
+              title='Edit Post' />
+            <button
+              className='btn del'
+              data-toggle='tolltip'
+              onClick={this.toDel}
+              title='Edit Post' />
+          </div>
+        }
+        <div className='comment'>
+          {
+            this.state.edit ?
+              <form
+                className="form-edit-comment"
+                onSubmit={this.props.handleSubmit}>
+                <input
+                  onChange={this.handleChangeBody}
+                  className='form-control'
+                  value={body}
+                />
+                <div className='btns-container float-right'>
+                  <button
+                    type='submit'
+                    onClick={this.handleSubmit}
+                    className='btn btn-light'>edit</button>
+                  <button
+                    onClick={this.toggleEdit}
+                    className='btn btn-light'>cancel</button>
+                </div>
+              </form> :
+              <h5 className='comment-body'>{body}</h5>
+          }
+          <div className='authpoint'>
+            <p className='author-body'>
+              <strong>By: </strong>
+              {author}
+            </p>
+            <p className='point-body'>
+              <strong>Points: </strong>
+              {voteScore}
+            </p>
+            <button
+              className='btn btn-light up-vote'
+              data-toggle='tooltip'
+              data-placement='top'
+              onClick={this.handleUpVote}
+              title="Up Vote" />
+            <button
+              className='btn btn-light down-vote'
+              data-toggle='tooltip'
+              data-placement='top'
+              onClick={this.handleDwVote}
+              title='Down Vote' />
+          </div>
         </div>
       </div>
     )

@@ -40,8 +40,12 @@ class PostsView extends React.Component {
   }
 
   handleSort = (e) => {
+    const sort = async () => { await this.setState({ sort: e.target.value }) }
+    
+    sort().then(() => {
+      this.props.dispatch(sortPosts(this.state.sort))
+    })
 
-    this.setState({ sort: e.target.value })
   }
 
   handleSortSubmit = (e) => {
@@ -52,7 +56,7 @@ class PostsView extends React.Component {
 
   render() {
     const { pathname } = this.props.location
-    
+
     return (
       <div className='wrapper'>
         <Categories />
@@ -69,8 +73,7 @@ class PostsView extends React.Component {
               <Select
                 onChange={this.handleSort}
                 showSubmitBtn={true}
-                onSubmit={this.handleSortSubmit}
-                value={this.state.sort}
+                selected={this.state.sort}
                 options={this.options}
                 btnTitle={'Sort'}
               />

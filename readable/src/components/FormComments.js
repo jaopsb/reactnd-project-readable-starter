@@ -1,11 +1,7 @@
 import React from 'react'
 import uuid from 'uuid'
-import { createComm } from '../API';
 
-/*
-precisa receber o id do post e o usuario 
-*/
-class FormCommentary extends React.Component {
+class FormComment extends React.Component {
   state = {
     comment: {
       author: '',
@@ -21,26 +17,24 @@ class FormCommentary extends React.Component {
   onChangeBody = (e) => {
     const { comment } = this.state
 
-    comment.body = e.target.value
-
-    this.setState({ comment })
+    this.setState({ comment: { ...comment, body: e.target.value } })
   }
 
   onSubmit = (e) => {
     e.preventDefault()
     const { comment } = this.state
 
-    
+    console.log('comment on submit', this.state)
+
     if (comment.body === '')
-    return alert("You can't create a comment with no comment!!!")
-    
+      return alert("You can't create a comment with no comment!!!")
+
     comment.id = uuid()
     comment.parentId = this.props.post.id
     comment.author = this.props.user
-    
-    createComm(comment)
 
-    this.setState({ comment: {} })
+    this.props.handleSubmit(comment)
+      .then((comment) => this.setState({ comment: { ...comment, body: '' } }))
   }
 
   render() {
@@ -65,4 +59,4 @@ class FormCommentary extends React.Component {
 }
 
 
-export default FormCommentary
+export default FormComment

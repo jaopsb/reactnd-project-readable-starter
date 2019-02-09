@@ -22,12 +22,12 @@ class NewPost extends React.Component {
   }
 
   componentDidMount = () => {
-    const { post } = this.props
+    const { post, category } = this.props
 
     if (post) {
       this.setState({ post, categorySelected: post.category })
     } else {
-      this.setState({ categorySelected: this.props.categories[0] })
+      this.setState({ categorySelected: category ? category : this.props.categories[0] })
     }
   }
 
@@ -44,25 +44,21 @@ class NewPost extends React.Component {
       post.id = uuid()
       post.timestamp = Date.now()
       post.author = this.props.user
-      post.category = this.props.category
+      post.category = this.state.categorySelected
 
       this.props.dispatch(handleAddPost(post))
-      this.props.history.push('/')
+        .then(() => this.props.history.push('/'))
     }
 
     if (this.props.type === 'Edit') {
-      
+
       const resp = window.confirm("Confirm editing?")
 
       if (resp) {
 
         post.category = this.state.categorySelected
-
-        console.log('post editing', post)
-
         this.props.dispatch(handleEditPost(post))
           .then(() => this.props.history.push('/'))
-
       }
     }
   }
@@ -100,9 +96,6 @@ class NewPost extends React.Component {
   }
 
   render() {
-
-    console.log("component did mount", this.state)
-
     return (
       <div className='container-fluid'>
         <div className='newpost-grid'>
@@ -143,9 +136,7 @@ class NewPost extends React.Component {
               />
               <Select
                 options={this.props.categories}
-                showSubmitBtn={false}
                 onChange={this.handleChangeCategory}
-                btnTitle={'Select Category'}
                 selected={this.state.categorySelected} />
             </div>
             <div className='btn-form-container'>

@@ -3,7 +3,7 @@ import React from 'react'
 
 class Select extends React.Component {
   render() {
-    const { options,  onChange, onSubmit, btnTitle, selected, showSubmitBtn } = this.props
+    const { options, onChange, selected } = this.props
 
     return (
       <React.Fragment>
@@ -21,15 +21,6 @@ class Select extends React.Component {
             )
           }
         </select>
-        {
-          showSubmitBtn &&
-          <button
-            type='submit'
-            onSubmit={onSubmit}
-            className='btn btn-light btn-select'>
-            {btnTitle}
-          </button>
-        }
       </React.Fragment>
     )
   }

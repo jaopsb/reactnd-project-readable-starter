@@ -52,12 +52,12 @@ class Post extends React.Component {
           !this.props.listView &&
           this.props.user === post.author &&
           <button
-            className='btn config'
-            data-toggle='tolltip'
+            className='btn post-edit'
+            data-toggle='tooltip'
             onClick={this.toEdit}
             title='Edit Post' />
         }
-        <Link to={`/post/${post.id}`}>
+        <Link to={`/${post.category}/${post.id}`}>
           < div className='card post' >
             <div className='card-body'>
               <div className='post-title-container'>
@@ -65,7 +65,7 @@ class Post extends React.Component {
 
               </div>
               <div className='authvote'>
-                <p className='author'>Created By: {post.author}</p>
+                <p className='author'>Created By: {post.author} in {post.category}</p>
                 <p className='vote'>Points: {post.voteScore}</p>
                 {
                   !this.props.listView &&

@@ -15,7 +15,7 @@ class Categories extends React.Component {
               <li
                 className='list-group-item'
                 key={cat.name + cat.path}>
-                <Link to={`/${cat.name}/posts`}>
+                <Link to={`/${cat.name}`}>
                   {cat.name}
                 </Link>
               </li>

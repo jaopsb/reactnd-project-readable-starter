@@ -11,10 +11,8 @@ body {
   grid-area: "hdr";
 }
 
-.error-page {
-  margin: auto;
-  height: 100px;
-  text-align: center;
+.comm-container{
+  width: 100%;
 }
 
 .comment {
@@ -26,8 +24,9 @@ body {
 }
 
 .comment-body {
-  padding: 10px 10px;
+  padding: 20px 20px;
   grid-area: 'comm'
+
 }
 
 .new-post-btn-container {
@@ -44,7 +43,6 @@ body {
 .form-btn-new-post {
   display: grid;
   grid-area: form;
-  grid-template-areas: 'select btn'
 }
 
 .select {
@@ -76,6 +74,7 @@ body {
 }
 
 .posts {
+  width: 900px;
   padding: 10px;
   grid-area: posts;
 }
@@ -83,6 +82,7 @@ body {
 .user {
   padding: 10px;
   height: 150px;
+  width: 200px;
   margin-right: 10px;
   text-align: center;
   grid-area: user;
@@ -104,12 +104,9 @@ body {
   margin-right: 20%;
 }
 
-
-.text-area-new-post{
+.text-area-new-post {
   margin-bottom: 5px;
 }
-
-
 
 .authvote {
   display: grid;
@@ -138,20 +135,23 @@ body {
 
 .post-title-container {
   display: grid;
-  grid-template-areas: 'title config'
+  grid-template-areas: 'title edit'
 }
 
 .title {
   grid-area: title;
 }
 
-.config {
-  grid-area: config;
+.btn-edit-del-comm {
   float: right;
+}
+
+.del {
+  grid-area: del;
   display: block;
   width: 50px;
   height: 50px;
-  background-image: url('./icons/settings.svg');
+  background-image: url('./icons/x-mark.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-color: white;
@@ -159,7 +159,48 @@ body {
   font-size: 0;
   border: none;
   outline: none;
-  margin-top:4px;
+  margin-top: 4px;
+}
+
+.post-edit {
+  float: right;
+  grid-area: edit;
+  display: block;
+  width: 50px;
+  height: 50px;
+  background-image: url('./icons/edit-icon.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: white;
+  background-size: 28px;
+  font-size: 0;
+  border: none;
+  outline: none;
+  margin-top: 4px;
+}
+
+.edit {
+  grid-area: edit;
+  display: block;
+  width: 50px;
+  height: 50px;
+  background-image: url('./icons/edit-icon.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: white;
+  background-size: 28px;
+  font-size: 0;
+  border: none;
+  outline: none;
+  margin-top: 4px;
+}
+
+.form-edit-comment {
+  margin: 5px;
+}
+
+.btns-container {
+  float: right
 }
 
 .sm-comments {
