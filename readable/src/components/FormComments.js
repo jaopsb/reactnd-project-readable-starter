@@ -24,14 +24,13 @@ class FormComment extends React.Component {
     e.preventDefault()
     const { comment } = this.state
 
-    console.log('comment on submit', this.state)
-
     if (comment.body === '')
       return alert("You can't create a comment with no comment!!!")
 
     comment.id = uuid()
     comment.parentId = this.props.post.id
     comment.author = this.props.user
+    comment.timestamp = Date.now()
 
     this.props.handleSubmit(comment)
       .then((comment) => this.setState({ comment: { ...comment, body: '' } }))

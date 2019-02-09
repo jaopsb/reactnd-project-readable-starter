@@ -5,6 +5,7 @@ export const RECEIVE_COMS = 'RECEIVE_COMS'
 export const DEL_COM = 'DEL_COMS'
 export const EDIT_COM = 'EDIT_COM'
 export const ADD_COM = 'ADD_COM'
+export const CLN_COM = 'CLN_COM'
 
 export const receiveCom = (comments) => ({
   type: RECEIVE_COMS,
@@ -24,6 +25,10 @@ export const editCom = (comment) => ({
 export const delCom = (id) => ({
   type: DEL_COM,
   id
+})
+
+export const cleanCom = () => ({
+  type: CLN_COM
 })
 
 export function handleReceiveComm(id) {

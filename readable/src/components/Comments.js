@@ -31,7 +31,7 @@ class Comments extends React.Component {
 const mapStateToProps = ({ comments, user }, props) => {
   return {
     user,
-    comments
+    comments: comments.filter(comm => comm.deleted === false)
   }
 }
 

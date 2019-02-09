@@ -56,7 +56,8 @@ class NewPost extends React.Component {
 
       if (resp) {
 
-        post.category = this.state.categorySelected
+        post.category = this.state.categorySelected.name
+
         this.props.dispatch(handleEditPost(post))
           .then(() => this.props.history.push('/'))
       }

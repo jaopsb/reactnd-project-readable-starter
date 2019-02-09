@@ -77,6 +77,8 @@ export const delComm = (id) =>
     url: `${api}/comments/${id}`,
     headers
   })
+    .then(res => res.data)
+    .catch(err => console.log("ERROR API", err))
 
 export const handleVote = (id, option, type) =>
   axios({

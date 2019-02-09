@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 
 class Comment extends React.Component {
 
@@ -41,7 +42,8 @@ class Comment extends React.Component {
   }
 
   toDel = () => {
-    const { comment } = this.props
+    const { comment } = this.state
+
     let resp = window.confirm("Delete this comment?")
 
     if (resp)
@@ -56,7 +58,7 @@ class Comment extends React.Component {
 
   render() {
     const { comment } = this.state
-    const { body, author, voteScore } = comment
+    const { body, author, voteScore, timestamp } = comment
 
     return (
       <div className='comm-container'>
@@ -102,6 +104,9 @@ class Comment extends React.Component {
             <p className='author-body'>
               <strong>By: </strong>
               {author}
+              <span className='sm-date'>
+                {`\t in ${moment(timestamp).format('D/M/YYYY')}`}
+              </span>
             </p>
             <p className='point-body'>
               <strong>Points: </strong>

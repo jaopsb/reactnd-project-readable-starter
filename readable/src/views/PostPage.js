@@ -4,13 +4,18 @@ import { Link } from 'react-router-dom'
 import Post from '../components/Post'
 import FormComment from '../components/FormComments';
 import Comments from '../components/Comments';
-import { handleReceiveComm, handleCreateComm } from '../actions/comments';
+import { handleReceiveComm, handleCreateComm, cleanCom } from '../actions/comments';
 
 class PostPage extends React.Component {
   componentDidMount() {
     const { id, receiveComs } = this.props
     receiveComs(id)
   }
+
+  componentWillUnmount() {
+    this.props.cleanComs()
+  }
+
   render() {
     const { post } = this.props
 
@@ -47,7 +52,8 @@ const mapStateToProps = ({ posts, user }, props) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     receiveComs: (id) => { dispatch(handleReceiveComm(id)) },
-    handleSubmit: (comment) => dispatch(handleCreateComm(comment))
+    handleSubmit: (comment) => dispatch(handleCreateComm(comment)),
+    cleanComs: () => dispatch(cleanCom())
   }
 }
 

@@ -30,7 +30,7 @@ class PostsView extends React.Component {
     },
     {
       path: TIME_DOWN,
-      name: 'by Date (oldest to newest'
+      name: 'by Date (oldest to newest)'
     }
   ]
 
@@ -41,7 +41,7 @@ class PostsView extends React.Component {
 
   handleSort = (e) => {
     const sort = async () => { await this.setState({ sort: e.target.value }) }
-    
+
     sort().then(() => {
       this.props.dispatch(sortPosts(this.state.sort))
     })
@@ -96,7 +96,9 @@ function mapStateToProps({ posts, user }, props) {
 
   return {
     category,
-    posts: category ? posts.filter(post => (post.category === category && !post.deleted)) : posts,
+    posts: category ?
+      posts.filter(post => (post.category === category && !post.deleted)) :
+      posts.filter(post => !post.deleted),
     user
   }
 }
