@@ -1,20 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import Posts from '../components/Posts';
-import Categories from '../components/Categories';
-import { logoutUser } from '../actions/user';
-import { setUser } from '../API';
+
 import User from '../components/User';
-import { sortPosts, VOTE_UP, VOTE_DOWN, TIME_UP, TIME_DOWN } from '../actions/posts';
+import Posts from '../components/Posts';
 import Select from '../components/Select';
+import Categories from '../components/Categories';
+
+import { setUser } from '../API';
+import { logoutUser } from '../actions/user';
+import { sortPosts, VOTE_UP, VOTE_DOWN, TIME_UP, TIME_DOWN } from '../actions/posts';
 
 class PostsView extends React.Component {
 
   state = {
     sort: ''
   }
-
+  
   options = [
     {
       path: VOTE_UP,
@@ -33,6 +35,8 @@ class PostsView extends React.Component {
       name: 'by Date (oldest to newest)'
     }
   ]
+
+
 
   handleLogout = () => {
     this.props.dispatch(logoutUser())

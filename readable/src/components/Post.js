@@ -62,7 +62,6 @@ class Post extends React.Component {
             <div className='card-body'>
               <div className='post-title-container'>
                 <h3 className='card-title title'>{post.title}</h3>
-
               </div>
               <div className='authvote'>
                 <p className='author'>Created By: {post.author} in {post.category}</p>

@@ -35,7 +35,9 @@ class App extends Component {
           }
           {
             this.props.loading === true
-              ? null
+              ? <div>
+                <h1 className="center">LOADING</h1>
+              </div>
               : <div>
                 <Switch>
                   <Route exact={true} path='/' component={PostsView} />
@@ -57,7 +59,7 @@ class App extends Component {
 function mapStateToProps({ posts, user }) {
   return {
     user,
-    loading: posts && !user
+    loading: !posts && !user
   }
 }
 

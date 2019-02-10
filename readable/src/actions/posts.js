@@ -65,7 +65,7 @@ export function handleDelPost(id) {
   return function (dispatch) {
     dispatch(showLoading())
     return deletePost(id)
-      .then(id => dispatch(delPost(id)))
+      .then(post => dispatch(delPost(post.id)))
       .then(() => dispatch(hideLoading()))
   }
 }

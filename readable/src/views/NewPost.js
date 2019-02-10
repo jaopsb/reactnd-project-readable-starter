@@ -27,7 +27,7 @@ class NewPost extends React.Component {
     if (post) {
       this.setState({ post, categorySelected: post.category })
     } else {
-      this.setState({ categorySelected: category ? category : this.props.categories[0] })
+      this.setState({ categorySelected: category ? category : this.props.categories[0].name })
     }
   }
 
@@ -47,7 +47,7 @@ class NewPost extends React.Component {
       post.category = this.state.categorySelected
 
       this.props.dispatch(handleAddPost(post))
-        .then(() => this.props.history.push('/'))
+        .then(() => this.props.history.push(`/${post.category}/${post.id}`))
     }
 
     if (this.props.type === 'Edit') {
@@ -56,7 +56,7 @@ class NewPost extends React.Component {
 
       if (resp) {
 
-        post.category = this.state.categorySelected.name
+        post.category = this.state.categorySelected
 
         this.props.dispatch(handleEditPost(post))
           .then(() => this.props.history.push('/'))
