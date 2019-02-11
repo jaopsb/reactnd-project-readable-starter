@@ -62,21 +62,19 @@ class Comment extends React.Component {
 
     return (
       <div className='comm-container'>
-        {
-          this.props.user === author &&
-          <div className="btn-edit-del-comm">
-            <button
-              className='btn edit'
-              data-toggle='tolltip'
-              onClick={this.toggleEdit}
-              title='Edit Post' />
-            <button
-              className='btn del'
-              data-toggle='tolltip'
-              onClick={this.toDel}
-              title='Edit Post' />
-          </div>
-        }
+
+        <div className="btn-edit-del-comm">
+          <button
+            className='btn btn-success edit'
+            data-toggle='tolltip'
+            onClick={this.toggleEdit}
+            title='Edit Post' />
+          <button
+            className='btn btn-danger del'
+            data-toggle='tolltip'
+            onClick={this.toDel}
+            title='Delete Post' />
+        </div>
         <div className='comment'>
           {
             this.state.edit ?
@@ -92,10 +90,10 @@ class Comment extends React.Component {
                   <button
                     type='submit'
                     onClick={this.handleSubmit}
-                    className='btn btn-light'>edit</button>
+                    className='btn btn-success'>edit</button>
                   <button
                     onClick={this.toggleEdit}
-                    className='btn btn-light'>cancel</button>
+                    className='btn btn-danger'>cancel</button>
                 </div>
               </form> :
               <h5 className='comment-body'>{body}</h5>
@@ -109,8 +107,12 @@ class Comment extends React.Component {
               </span>
             </p>
             <p className='point-body'>
-              <strong>Points: </strong>
-              {voteScore}
+              <strong>Score: {'\t'}</strong>
+              {
+                voteScore >= 0 ?
+                  <span className='badge badge-success'>{voteScore}</span> :
+                  <span className='badge badge-danger'>{voteScore}</span>
+              }
             </p>
             <button
               className='btn btn-light up-vote'

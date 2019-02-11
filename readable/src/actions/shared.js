@@ -11,9 +11,9 @@ export function handleInitialData(user) {
     dispatch(showLoading())
     return getInitialData()
       .then(({ categories, posts }) => {
+        dispatch(loginUser(user))
         dispatch(recievePosts(posts))
         dispatch(recieveCat(categories))
-        dispatch(loginUser(user))
         dispatch(hideLoading())
       })
   }

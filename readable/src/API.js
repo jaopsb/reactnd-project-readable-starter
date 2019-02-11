@@ -14,11 +14,11 @@ const headers = {
 }
 
 export function getUser() {
-  return localStorage.getItem('user')
+  return localStorage.getItem('ReadableUser')
 }
 
 export function setUser(user) {
-  localStorage.setItem('user', user)
+  localStorage.setItem('ReadableUser', user)
 }
 
 export function getInitialData() {
@@ -32,9 +32,18 @@ export function getInitialData() {
 }
 
 export const getAllPosts = () =>
-  fetch(`${api}/posts`, { headers })
-    .then(res => res.json())
-    .then(data => data)
+  axios({
+    method: 'get',
+    url: `${api}/posts`,
+    headers
+  })
+    .then(res => res.data)
+    .catch(err => console.log("ERROR API", err))
+
+/*
+fetch(`${api}/posts`, { headers })
+.then(res => res.json())
+.then(data => data)*/
 
 export const getAllCategories = () =>
   fetch(`${api}/categories`, { headers })

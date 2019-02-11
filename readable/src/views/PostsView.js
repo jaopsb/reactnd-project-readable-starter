@@ -16,7 +16,7 @@ class PostsView extends React.Component {
   state = {
     sort: ''
   }
-  
+
   options = [
     {
       path: VOTE_UP,
@@ -101,8 +101,7 @@ function mapStateToProps({ posts, user }, props) {
   return {
     category,
     posts: category ?
-      posts.filter(post => (post.category === category && !post.deleted)) :
-      posts.filter(post => !post.deleted),
+      posts.filter(post => (post.category === category)) : posts,
     user
   }
 }

@@ -13,12 +13,11 @@ class Posts extends React.Component {
 
     return (
       <div>
-        {posts && posts.map(post => {
-          return <Post
-            listView={this.props.listView}
-            key={post.id}
-            post={post} />
-        })}
+        {posts && posts.map(post => !post.deleted ? <Post
+          listView={this.props.listView}
+          key={post.id}
+          post={post} /> : null
+        )}
       </div>
     )
   }

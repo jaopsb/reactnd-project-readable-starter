@@ -34,21 +34,18 @@ class App extends Component {
             <Login />
           }
           {
-            this.props.loading === true
-              ? <div>
-                <h1 className="center">LOADING</h1>
+            this.props.loading === false &&
+            < div >
+            <Switch>
+              <Route exact={true} path='/' component={PostsView} />
+              <Route exact={true} path='/new/' component={NewPost} />
+              <Route exact={true} path='/edit/:id' component={NewPost} />
+              <Route exact={true} path='/:category' component={PostsView} />
+              <Route exact={true} path='/:category/new/' component={NewPost} />
+              <Route exact={true} path='/:category/:id' component={PostPage} />
+            </Switch>
               </div>
-              : <div>
-                <Switch>
-                  <Route exact={true} path='/' component={PostsView} />
-                  <Route exact={true} path='/new/' component={NewPost} />
-                  <Route exact={true} path='/edit/:id' component={NewPost} />
-                  <Route exact={true} path='/:category' component={PostsView} />
-                  <Route exact={true} path='/:category/new/' component={NewPost} />
-                  <Route exact={true} path='/:category/:id' component={PostPage} />
-                </Switch>
-              </div>
-          }
+      }
         </React.Fragment>
       </Router>
     );
@@ -59,7 +56,7 @@ class App extends Component {
 function mapStateToProps({ posts, user }) {
   return {
     user,
-    loading: !posts && !user
+    loading: !posts || !user
   }
 }
 

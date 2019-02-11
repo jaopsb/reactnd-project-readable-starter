@@ -40,6 +40,19 @@ class Post extends React.Component {
     this.props.history.push(`/edit/${this.state.post.id}`)
   }
 
+
+  handleDelPost = () => {
+
+    const { post } = this.state
+
+    const resp = window.confirm("Are you really going to delete this post??")
+
+    if (resp) {
+      this.props.dispatch(handleDelPost(post.id))
+        .then(() => this.props.history.push('/'))
+    }
+  }
+
   render() {
     const { post } = this.state
 
@@ -48,58 +61,71 @@ class Post extends React.Component {
 
     return (
       <React.Fragment>
-        {
-          !this.props.listView &&
-          this.props.user === post.author &&
-          <button
-            className='btn post-edit'
-            data-toggle='tooltip'
-            onClick={this.toEdit}
-            title='Edit Post' />
-        }
-        <Link to={`/${post.category}/${post.id}`}>
-          < div className='card post' >
-            <div className='card-body'>
-              <div className='post-title-container'>
+        < div className='card post' >
+          <div className='card-body'>
+            <div className='post-title-container'>
+              <Link to={`/${post.category}/${post.id}`}>
                 <h3 className='card-title title'>{post.title}</h3>
-              </div>
-              <div className='authvote'>
-                <p className='author'>Created By: {post.author} in {post.category}</p>
-                <p className='vote'>Points: {post.voteScore}</p>
-                {
-                  !this.props.listView &&
-                  (
-                    <React.Fragment>
-                      <button
-                        className='btn btn-light up-vote'
-                        data-toggle='tooltip'
-                        data-placement='top'
-                        onClick={this.handleUpVote}
-                        title="Up Vote" />
-                      <button
-                        className='btn btn-light down-vote'
-                        data-toggle='tooltip'
-                        data-placement='top'
-                        onClick={this.handleDwVote}
-                        title='Down Vote' />
-                    </React.Fragment>
-                  )
-                }
-              </div>
-              <p className='sm-date'>Created in: {moment(post.timestamp).format('D/M/YYYY')}</p>
+              </Link>
               {
-                this.props.listView &&
-                <p className='card-text sm-comments'>{post.commentCount} comments</p>
-              }
-              {
-                !this.props.listView &&
-                <div className='card-body'>
-                  {post.body}
+                post.deleted &&
+                <div className='badge-deleted'>
+                  <span className='badge badge-danger'>deleted</span>
                 </div>
               }
             </div>
-          </div >
-        </Link>
+            <div className='authvote'>
+              <p className='author'>Created By: {post.author} in
+              <Link to={`/${post.category}`}>
+                  <strong>
+                    {'\t' + post.category}
+                  </strong>
+                </Link>
+              </p>
+              <p className='vote'>Score: {'\t'}
+                {
+                  post.voteScore >= 0 ?
+                    <span className='badge badge-success'>{post.voteScore}</span> :
+                    <span className='badge badge-danger'>{post.voteScore}</span>
+                }
+              </p>
+              <button
+                className='btn post-edit'
+                data-toggle='tooltip'
+                onClick={this.toEdit}
+                title='Edit Post' />
+              <button
+                className='btn btn-light up-vote'
+                data-toggle='tooltip'
+                data-placement='top'
+                onClick={this.handleUpVote}
+                title="Up Vote" />
+              <button
+                className='btn btn-light down-vote'
+                data-toggle='tooltip'
+                data-placement='top'
+                onClick={this.handleDwVote}
+                title='Down Vote' />
+              <button
+                type="button"
+                data-toggle='tooltip'
+                title='Delete Post'
+                onClick={this.handleDelPost}
+                className="btn btn-danger btn-form-delete" />
+            </div>
+            <p className='sm-date'>Created in: {moment(post.timestamp).format('D/M/YYYY')}</p>
+            {
+              this.props.listView &&
+              <p className='card-text sm-comments'>{post.commentCount} comments</p>
+            }
+            {
+              !this.props.listView &&
+              <div className='card-body'>
+                {post.body}
+              </div>
+            }
+          </div>
+        </div >
       </React.Fragment>
     )
   }

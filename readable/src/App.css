@@ -7,6 +7,10 @@ body {
   grid-template-areas: 'cat posts user';
 }
 
+.badge-deleted {
+  grid-area: badge;
+}
+
 .top {
   grid-area: "hdr";
 }
@@ -109,7 +113,7 @@ body {
 
 .authvote {
   display: grid;
-  grid-template-areas: 'auth vote vote-up vote-down';
+  grid-template-areas: 'auth vote vote-up vote-down edit btn-delete';
 }
 
 .post {
@@ -134,7 +138,7 @@ body {
 
 .post-title-container {
   display: grid;
-  grid-template-areas: 'title edit'
+  grid-template-areas: 'title badge'
 }
 
 .title {
@@ -153,8 +157,6 @@ body {
   background-image: url('./icons/x-mark.svg');
   background-position: center;
   background-repeat: no-repeat;
-  background-color: white;
-  background-size: 28px;
   font-size: 0;
   border: none;
   outline: none;
@@ -162,10 +164,8 @@ body {
 }
 
 .post-edit {
-  float: right;
   grid-area: edit;
   display: block;
-  width: 50px;
   height: 50px;
   background-image: url('./icons/edit-icon.svg');
   background-position: center;
@@ -175,7 +175,6 @@ body {
   font-size: 0;
   border: none;
   outline: none;
-  margin-top: 4px;
 }
 
 .edit {
@@ -259,10 +258,21 @@ a:hover {
 
 .btn-form-delete {
   grid-area: btn-delete;
+  top: 20px;
+  left: 15px;
+  width: 50px;
+  height: 53px;
+  background-image: url('./icons/x-mark.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50px;
+  font-size: 0;
+  border: none;
+  outline: none;
 }
 
 .back-button {
-  grid-area: 'bck-btn';
+  grid-area: bck-btn;
   display: block;
   top: 20px;
   left: 15px;
